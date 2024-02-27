@@ -56,44 +56,6 @@ class Environment():
     
 #-------------------------------------------------------------------------------------------------------------------------------------
 
-
-
-    def __get_obs(self, scene_info):                                             
-
-        FOOD_TYPES = ["FOOD_1", "FOOD_2", "FOOD_3"]
-        GARBAGE_TYPES = ["GARBAGE_1", "GARBAGE_2", "GARBAGE_3"]
-
-
-        # 紀錄不同食物及垃圾的方向 方便給不同權重的 reward
-
-        squid_pos = [scene_info["squid_x"], scene_info["squid_y"]]
-        all_food_1_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_1"]
-        all_food_2_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_2"]
-        all_food_3_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_3"]
-
-        all_garbage_1_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "GARBAGE_1"]
-        all_garbage_2_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "GARBAGE_2"]
-        all_garbage_3_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "GARBAGE_3"]
-
-        # Compute the direction to the nearest food and garbage, or 0 if none are present
-        food_1_direction = self.__get_direction_to_nearest(squid_pos, all_food_1_pos) if all_food_1_pos else 0
-        food_2_direction = self.__get_direction_to_nearest(squid_pos, all_food_2_pos) if all_food_2_pos else 0
-        food_3_direction = self.__get_direction_to_nearest(squid_pos, all_food_3_pos) if all_food_3_pos else 0
-
-        garbage_1_direction = self.__get_direction_to_nearest(squid_pos, all_garbage_1_pos) if all_garbage_1_pos else 0
-        garbage_2_direction = self.__get_direction_to_nearest(squid_pos, all_garbage_2_pos) if all_garbage_2_pos else 0
-        garbage_3_direction = self.__get_direction_to_nearest(squid_pos, all_garbage_3_pos) if all_garbage_3_pos else 0
-
-        # Return an ordered dictionary containing the computed directions        
-        return OrderedDict([('food_1_direction', food_1_direction), 
-                            ('food_2_direction', food_2_direction),  
-                            ('food_3_direction', food_3_direction), 
-                            ('garbage_1_direction', garbage_1_direction), 
-                            ('garbage_2_direction', garbage_2_direction), 
-                            ('garbage_3_direction', garbage_3_direction)])
-
-
-
     def __get_obs(self, scene_info):                                             
 
         FOOD_TYPES = ["FOOD_1", "FOOD_2", "FOOD_3"]
@@ -103,9 +65,9 @@ class Environment():
         # 以食物垃圾的 type 來分類，方便給不同權重的 reward，讓魷魚在做不同選擇時給的 reward 不同
 
         squid_pos = [scene_info["squid_x"], scene_info["squid_y"]]
-        all_food_1_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_1"]
-        all_food_2_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_2"]
-        all_food_3_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] in "FOOD_3"]
+        all_food_1_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "FOOD_1"]
+        all_food_2_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "FOOD_2"]
+        all_food_3_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "FOOD_3"]
 
         all_garbage_1_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "GARBAGE_1"]
         all_garbage_2_pos = [[food["x"], food["y"]] for food in scene_info["foods"] if food["type"] == "GARBAGE_2"]
