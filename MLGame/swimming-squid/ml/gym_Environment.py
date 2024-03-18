@@ -199,7 +199,7 @@ class Environment(gym.Env):
 
         # Determine the region based on the sum and difference of the relative coordinates
         if delta_x + delta_y > 0:
-            if delta_x - delta_y > 0:
+            if delta_x - delｃta_y > 0:
                 return 1  # Right
             else:
                 return 4  # Up
